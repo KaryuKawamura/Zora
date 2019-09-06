@@ -73,14 +73,14 @@ function dateToHoroscope(req, res, next) {
 
     // Adding the calculated horoscope to the newly created user row (with the largest ID #) in the UsersTable database
     knex
-      .from('UsersTable')
+      .from('userstable')
       .max('id')
       .then(([row]) => {
         if (!row) {
           console.log("ID does not exist")
           return res.send("ID does not exist")
         }
-        return knex('UsersTable')
+        return knex('userstable')
           .update('horoscope', horoscope)
           .where('id', '=', row.max)
       });
