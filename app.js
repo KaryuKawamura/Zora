@@ -7,6 +7,14 @@ const router = require('./router')(express);
 const morgan = require('morgan');
 const hb = require('express-handlebars');
 
+// const ClothesService = require('./ClothesService');
+// const ClothesRouter = require('./ClothesRouter');
+
+require('dotenv').config();
+
+const knexConfig = require('./knexfile').development;
+const knex = require('knex')(knexConfig);
+
 app.engine('handlebars', hb({
   defaultLayout: 'main'
 }));
@@ -21,6 +29,13 @@ app.use(session({
   saveUninitialized: false,
   cookie: {secure: false}
 }));
+
+
+// const clothesService = new ClothesService(knex);
+
+// app.use('/api/notes/', (new ClothesRouter(clothesService)).router());
+
+
 
 app.use(express.static('public'))
 // app.use(express.static('pages'))
